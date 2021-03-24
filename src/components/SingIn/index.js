@@ -21,7 +21,7 @@ function SingIn(props) {
       await auth.signInWithEmailAndPassword(email, password);
       setEmail("");
       setPassword("");
-    } catch {
+    } catch (err) {
       console.log(err);
     }
   };
