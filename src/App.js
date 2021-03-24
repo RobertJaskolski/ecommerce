@@ -11,6 +11,7 @@ import HomepageLayout from "./layouts/HomepageLayout";
 import Homepage from "./pages/Homepage";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
+import Recovery from "./pages/Recovery";
 
 const INIT_STATE = {
   currentUser: null,
@@ -65,11 +66,15 @@ class App extends React.Component {
           />
           <Route
             path="/registration"
-            render={() => (
-              <MainLayout currentUser={currentUser}>
-                <Registration />
-              </MainLayout>
-            )}
+            render={() =>
+              currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <MainLayout currentUser={currentUser}>
+                  <Registration />
+                </MainLayout>
+              )
+            }
           />
           <Route
             path="/login"
@@ -79,6 +84,18 @@ class App extends React.Component {
               ) : (
                 <MainLayout currentUser={currentUser}>
                   <Login />
+                </MainLayout>
+              )
+            }
+          />
+          <Route
+            path="/recovery"
+            render={() =>
+              currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <MainLayout currentUser={currentUser}>
+                  <Recovery />
                 </MainLayout>
               )
             }
