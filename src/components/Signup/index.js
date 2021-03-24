@@ -39,11 +39,6 @@ function Signup() {
         password
       );
       await handleUserProfile(user, { displayName });
-      setDisplayName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      setErrors([]);
     } catch (err) {
       console.log(err);
     }

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./styles.scss";
-import Button from "../Forms/Button";
 import { singInWithGoogle, auth } from "../../firebase/utils";
+import { Link } from "react-router-dom";
+
+import Button from "../Forms/Button";
 import AuthWrapper from "../AuthWrapper";
 import Input from "../Forms/Input";
 
@@ -48,10 +50,15 @@ function SignIn(props) {
             onChange={handleChange}
           />
           <Button type="submit">LogIn</Button>
+
           <div className="socialSingin">
             <div className="row">
               <Button onClick={singInWithGoogle}>Sing in with Google</Button>
             </div>
+          </div>
+
+          <div className="links">
+            <Link to="/recovery">Reset Password</Link>
           </div>
         </form>
       </div>
