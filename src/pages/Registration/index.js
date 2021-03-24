@@ -1,11 +1,8 @@
 import React from "react";
+import Singup from "../../components/Singup";
 
 function Registration() {
-  return (
-    <div>
-      <h1>Registration page</h1>
-    </div>
-  );
+  return <Singup />;
 }
 
 export default Registration;
