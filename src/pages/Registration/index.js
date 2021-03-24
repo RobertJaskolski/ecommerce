@@ -1,8 +1,8 @@
 import React from "react";
-import Singup from "../../components/Singup";
+import Signup from "../../components/Signup";
 
 function Registration() {
-  return <Singup />;
+  return <Signup />;
 }
 
 export default Registration;

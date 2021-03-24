@@ -4,13 +4,18 @@ import "./styles.scss";
 
 import Input from "../Forms/Input";
 import Button from "../Forms/Button";
+import AuthWrapper from "../AuthWrapper";
 
-function Singup() {
+function Signup() {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+
+  const configAuthWrapper = {
+    headline: "Sign in",
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,55 +50,51 @@ function Singup() {
   };
 
   return (
-    <div className="singup">
-      <div className="wrap">
-        <h2>Singup</h2>
+    <AuthWrapper {...configAuthWrapper}>
+      {errors.length > 0 && (
+        <ul>
+          {errors.map((err, index) => {
+            return <li key={index}>{err}</li>;
+          })}
+        </ul>
+      )}
 
-        {errors.length > 0 && (
-          <ul>
-            {errors.map((err, index) => {
-              return <li key={index}>{err}</li>;
-            })}
-          </ul>
-        )}
+      <div className="formWrap">
+        <form onSubmit={handleFormSubmit}>
+          <Input
+            type="text"
+            name="displayName"
+            value={displayName}
+            placeholder="Full Name"
+            onChange={handleChange}
+          />
+          <Input
+            type="email"
+            name="email"
+            value={email}
+            placeholder="E-mail"
+            onChange={handleChange}
+          />
+          <Input
+            type="password"
+            name="password"
+            value={password}
+            placeholder="Password"
+            onChange={handleChange}
+          />
+          <Input
+            type="password"
+            name="confirmPassword"
+            value={confirmPassword}
+            placeholder="Confirm Password"
+            onChange={handleChange}
+          />
 
-        <div className="formWrap">
-          <form onSubmit={handleFormSubmit}>
-            <Input
-              type="text"
-              name="displayName"
-              value={displayName}
-              placeholder="Full Name"
-              onChange={handleChange}
-            />
-            <Input
-              type="email"
-              name="email"
-              value={email}
-              placeholder="E-mail"
-              onChange={handleChange}
-            />
-            <Input
-              type="password"
-              name="password"
-              value={password}
-              placeholder="Password"
-              onChange={handleChange}
-            />
-            <Input
-              type="password"
-              name="confirmPassword"
-              value={confirmPassword}
-              placeholder="Confirm Password"
-              onChange={handleChange}
-            />
-
-            <Button type="submit">Register</Button>
-          </form>
-        </div>
+          <Button type="submit">Register</Button>
+        </form>
       </div>
-    </div>
+    </AuthWrapper>
   );
 }
 
-export default Singup;
+export default Signup;
