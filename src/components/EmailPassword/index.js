@@ -15,11 +15,6 @@ function EmailPassword(props) {
     headline: "Reset Password",
   };
 
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setEmail(value);
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -55,7 +50,9 @@ function EmailPassword(props) {
             type="email"
             name="email"
             value={email}
-            onChange={handleChange}
+            handleChange={(e) => {
+              setEmail(e.target.value);
+            }}
             placeholder="E-mail"
           />
           <Button type="submit">Reset Password</Button>

@@ -10,14 +10,9 @@ import Input from "../Forms/Input";
 function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const configAuthWrapper = {
     headline: "Login",
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "email") setEmail(value);
-    else if (name === "password") setPassword(value);
   };
 
   const handleSubmit = async (e) => {
@@ -26,6 +21,8 @@ function SignIn(props) {
       await auth.signInWithEmailAndPassword(email, password);
       setEmail("");
       setPassword("");
+      console.log("udało się ");
+      props.history.push("/");
     } catch (err) {
       console.log(err);
     }
@@ -40,14 +37,14 @@ function SignIn(props) {
             name="email"
             value={email}
             placeholder="E-mail"
-            onChange={handleChange}
+            handleChange={(e) => setEmail(e.target.value)}
           />
           <Input
             type="password"
             name="password"
             value={password}
             placeholder="Password"
-            onChange={handleChange}
+            handleChange={(e) => setPassword(e.target.value)}
           />
           <Button type="submit">LogIn</Button>
 

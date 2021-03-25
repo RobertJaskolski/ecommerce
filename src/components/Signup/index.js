@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { auth, handleUserProfile } from "../../firebase/utils";
 import "./styles.scss";
 
@@ -6,7 +7,7 @@ import Input from "../Forms/Input";
 import Button from "../Forms/Button";
 import AuthWrapper from "../AuthWrapper";
 
-function Signup() {
+function Signup(props) {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,12 +18,11 @@ function Signup() {
     headline: "Sign in",
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "displayName") setDisplayName(value);
-    else if (name === "email") setEmail(value);
-    else if (name === "password") setPassword(value);
-    else if (name === "confirmPassword") setConfirmPassword(value);
+  const resetForm = () => {
+    setDisplayName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   const handleFormSubmit = async (e) => {
@@ -30,6 +30,7 @@ function Signup() {
 
     if (password !== confirmPassword) {
       setErrors([...errors, "Password Don't match "]);
+      resetForm();
       return;
     }
 
@@ -39,7 +40,10 @@ function Signup() {
         password
       );
       await handleUserProfile(user, { displayName });
+      resetForm();
+      props.history.push("/");
     } catch (err) {
+      resetForm();
       console.log(err);
     }
   };
@@ -61,28 +65,36 @@ function Signup() {
             name="displayName"
             value={displayName}
             placeholder="Full Name"
-            onChange={handleChange}
+            handleChange={(e) => {
+              setDisplayName(e.target.value);
+            }}
           />
           <Input
             type="email"
             name="email"
             value={email}
             placeholder="E-mail"
-            onChange={handleChange}
+            handleChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <Input
             type="password"
             name="password"
             value={password}
             placeholder="Password"
-            onChange={handleChange}
+            handleChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
           <Input
             type="password"
             name="confirmPassword"
             value={confirmPassword}
             placeholder="Confirm Password"
-            onChange={handleChange}
+            handleChange={(e) => {
+              setConfirmPassword(e.target.value);
+            }}
           />
 
           <Button type="submit">Register</Button>
@@ -92,4 +104,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default withRouter(Signup);
