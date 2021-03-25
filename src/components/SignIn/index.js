@@ -35,14 +35,14 @@ function SignIn(props) {
             name="email"
             value={email}
             placeholder="E-mail"
-            onChange={(e) => setEmail(e.target.value)}
+            handleChange={(e) => setEmail(e.target.value)}
           />
           <Input
             type="password"
             name="password"
             value={password}
             placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
+            handleChange={(e) => setPassword(e.target.value)}
           />
           <Button type="submit">LogIn</Button>
 
