@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { auth, handleUserProfile } from "../../firebase/utils";
 import "./styles.scss";
 
@@ -6,7 +7,7 @@ import Input from "../Forms/Input";
 import Button from "../Forms/Button";
 import AuthWrapper from "../AuthWrapper";
 
-function Signup() {
+function Signup(props) {
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,6 +40,8 @@ function Signup() {
         password
       );
       await handleUserProfile(user, { displayName });
+      resetForm();
+      props.history.push("/");
     } catch (err) {
       resetForm();
       console.log(err);
@@ -101,4 +104,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default withRouter(Signup);

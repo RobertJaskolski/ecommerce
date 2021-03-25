@@ -21,6 +21,8 @@ function SignIn(props) {
       await auth.signInWithEmailAndPassword(email, password);
       setEmail("");
       setPassword("");
+      console.log("udało się ");
+      props.history.push("/");
     } catch (err) {
       console.log(err);
     }
