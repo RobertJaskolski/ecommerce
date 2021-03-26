@@ -5,6 +5,8 @@ const INIT_STATE = {
   signInSuccess: false,
   signUpSuccess: false,
   signUpError: [],
+  resetPasswordSuccess: false,
+  resetPasswordError: [],
 };
 const userReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
@@ -16,6 +18,10 @@ const userReducer = (state = INIT_STATE, action) => {
       return { ...state, signUpSuccess: action.payload };
     case userTypes.SIGN_UP_ERROR:
       return { ...state, signUpError: action.payload };
+    case userTypes.RESET_PASSWORD_SUCCESS:
+      return { ...state, resetPasswordSuccess: action.payload };
+    case userTypes.RESET_PASSWORD_ERROR:
+      return { ...state, resetPasswordError: action.payload };
     default:
       return state;
   }
