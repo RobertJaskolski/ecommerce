@@ -20,7 +20,7 @@ import Dashboard from "./pages/Dashboard";
 import WithAuth from "./hoc/WithAuth";
 
 function App(props) {
-  const { setCurrentUser, currentUser } = props;
+  const { setCurrentUser } = props;
 
   useEffect(() => {
     const authListener = auth.onAuthStateChanged(async (userAuth) => {
