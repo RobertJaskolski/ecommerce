@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { signInUser, signInWithGoogle } from "../../redux/User/user.actions";
+import {
+  signInUser,
+  signInWithGoogle,
+  resetAllAuthForms,
+} from "../../redux/User/user.actions";
 import { Link, withRouter } from "react-router-dom";
 
 import Button from "../Forms/Button";
@@ -35,6 +39,7 @@ function SignIn(props) {
     if (signInSuccess) {
       setEmail("");
       setPassword("");
+      dispatch(resetAllAuthForms());
       props.history.push("/");
     }
   }, [signInSuccess]);
