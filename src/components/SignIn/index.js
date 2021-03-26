@@ -3,8 +3,7 @@ import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
   emailSignInStart,
-  signInWithGoogle,
-  resetAllAuthForms,
+  googleSignInStart,
 } from "../../redux/User/user.actions";
 import { Link, withRouter } from "react-router-dom";
 
@@ -32,7 +31,7 @@ function SignIn(props) {
   };
 
   const handleGoogleSignIn = () => {
-    dispatch(signInWithGoogle());
+    dispatch(googleSignInStart());
   };
 
   useEffect(() => {
