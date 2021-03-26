@@ -1,12 +1,22 @@
-import React, { useState } from "react";
-import { auth, handleUserProfile } from "../../firebase/utils";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { signUpUserStart } from "../../redux/User/user.actions";
+import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
 
 import Input from "../Forms/Input";
 import Button from "../Forms/Button";
 import AuthWrapper from "../AuthWrapper";
 
-function Signup() {
+const mapState = ({ user }) => ({
+  currentUser: user["currentUser"],
+  userErr: user["userErr"],
+});
+
+function Signup(props) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { currentUser, userErr } = useSelector(mapState);
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -17,32 +27,32 @@ function Signup() {
     headline: "Sign in",
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "displayName") setDisplayName(value);
-    else if (name === "email") setEmail(value);
-    else if (name === "password") setPassword(value);
-    else if (name === "confirmPassword") setConfirmPassword(value);
+  const resetForm = () => {
+    setDisplayName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      setErrors([...errors, "Password Don't match "]);
-      return;
-    }
-
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await handleUserProfile(user, { displayName });
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(
+      signUpUserStart({ displayName, email, password, confirmPassword })
+    );
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      resetForm();
+      history.push("/");
+    }
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (Array.isArray(userErr) && userErr.length > 0) {
+      setErrors(userErr);
+    }
+  }, [userErr]);
 
   return (
     <AuthWrapper {...configAuthWrapper}>
@@ -61,28 +71,36 @@ function Signup() {
             name="displayName"
             value={displayName}
             placeholder="Full Name"
-            onChange={handleChange}
+            handleChange={(e) => {
+              setDisplayName(e.target.value);
+            }}
           />
           <Input
             type="email"
             name="email"
             value={email}
             placeholder="E-mail"
-            onChange={handleChange}
+            handleChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <Input
             type="password"
             name="password"
             value={password}
             placeholder="Password"
-            onChange={handleChange}
+            handleChange={(e) => {
+              setPassword(e.target.value);
+            }}
           />
           <Input
             type="password"
             name="confirmPassword"
             value={confirmPassword}
             placeholder="Confirm Password"
-            onChange={handleChange}
+            handleChange={(e) => {
+              setConfirmPassword(e.target.value);
+            }}
           />
 
           <Button type="submit">Register</Button>
