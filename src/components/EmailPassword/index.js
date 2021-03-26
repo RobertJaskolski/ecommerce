@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.scss";
-import { auth } from "../../firebase/utils";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  resetPassword,
+  resetAllAuthForms,
+} from "../../redux/User/user.actions";
 import { withRouter } from "react-router-dom";
 
 import AuthWrapper from "../AuthWrapper";
 import Input from "../Forms/Input";
 import Button from "../Forms/Button";
 
+const mapState = ({ user }) => ({
+  resetPasswordSuccess: user["resetPasswordSuccess"],
+  resetPasswordError: user["resetPasswordError"],
+});
+
 function EmailPassword(props) {
+  const { resetPasswordSuccess, resetPasswordError } = useSelector(mapState);
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState("");
 
@@ -15,26 +26,22 @@ function EmailPassword(props) {
     headline: "Reset Password",
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    try {
-      const config = {
-        url: "http://localhost:3000/login",
-      };
-      await auth
-        .sendPasswordResetEmail(email, config)
-        .then(() => {
-          props.history.push("/login");
-        })
-        .catch((err) => {
-          setErrors([...errors, "Email not found"]);
-        });
-    } catch (err) {
-      setErrors([...errors, err]);
-    }
+    dispatch(resetPassword({ email }));
   };
 
+  useEffect(() => {
+    if (resetPasswordSuccess) {
+      dispatch(resetAllAuthForms());
+      props.history.push("/login");
+    }
+  }, [resetPasswordSuccess]);
+  useEffect(() => {
+    if (Array.isArray(resetPasswordError) && resetPasswordError.length > 0) {
+      setErrors(resetPasswordError);
+    }
+  }, [resetPasswordError]);
   return (
     <AuthWrapper {...configAuthWrapper}>
       <div className="formWrap">
