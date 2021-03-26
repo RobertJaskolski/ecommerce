@@ -5,7 +5,7 @@ import {
   emailSignInStart,
   googleSignInStart,
 } from "../../redux/User/user.actions";
-import { Link, withRouter } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Button from "../Forms/Button";
 import AuthWrapper from "../AuthWrapper";
@@ -16,8 +16,9 @@ const mapState = ({ user }) => ({
 });
 
 function SignIn(props) {
-  const { currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
+  const { currentUser } = useSelector(mapState);
+  const history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -38,7 +39,7 @@ function SignIn(props) {
     if (currentUser) {
       setEmail("");
       setPassword("");
-      props.history.push("/");
+      history.push("/");
     }
   }, [currentUser]);
 
@@ -77,4 +78,4 @@ function SignIn(props) {
   );
 }
 
-export default withRouter(SignIn);
+export default SignIn;

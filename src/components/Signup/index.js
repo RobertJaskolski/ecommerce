@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { signUpUserStart } from "../../redux/User/user.actions";
 import { useDispatch, useSelector } from "react-redux";
 import "./styles.scss";
@@ -14,8 +14,9 @@ const mapState = ({ user }) => ({
 });
 
 function Signup(props) {
-  const { currentUser, userErr } = useSelector(mapState);
   const dispatch = useDispatch();
+  const history = useHistory();
+  const { currentUser, userErr } = useSelector(mapState);
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -43,7 +44,7 @@ function Signup(props) {
   useEffect(() => {
     if (currentUser) {
       resetForm();
-      props.history.push("/");
+      history.push("/");
     }
   }, [currentUser]);
 
@@ -109,4 +110,4 @@ function Signup(props) {
   );
 }
 
-export default withRouter(Signup);
+export default Signup;
