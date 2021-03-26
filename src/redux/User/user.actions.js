@@ -43,6 +43,10 @@ export const resetPasswordSuccess = () => ({
   payload: true,
 });
 
+export const resetUserState = () => ({
+  type: userTypes.RESET_USER_STATE,
+});
+
 // -----------------------------------------
 export const setCurrentUser = (user) => ({
   type: userTypes.SET_CURRENT_USER,
