@@ -14,9 +14,11 @@ import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import Recovery from "./pages/Recovery";
 import Dashboard from "./pages/Dashboard";
+import Admin from "./pages/Admin";
 
 // HoC
 import WithAuth from "./hoc/WithAuth";
+import WithAdminAuth from "./hoc/WithAdminAuth";
 
 function App(props) {
   const dispatch = useDispatch();
@@ -69,6 +71,16 @@ function App(props) {
                 <Dashboard />
               </MainLayout>
             </WithAuth>
+          )}
+        />
+        <Route
+          path="/admin"
+          render={() => (
+            <MainLayout>
+              <WithAdminAuth>
+                <Admin />
+              </WithAdminAuth>
+            </MainLayout>
           )}
         />
       </Switch>
