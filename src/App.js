@@ -4,6 +4,9 @@ import "./default.scss";
 import { checkUserSession } from "./redux/User/user.actions";
 import { useDispatch } from "react-redux";
 
+// Components
+import AdminToolbar from "./components/AdminToolbar";
+
 // Layouts
 import MainLayout from "./layouts/MainLayout";
 import HomepageLayout from "./layouts/HomepageLayout";
@@ -29,6 +32,7 @@ function App(props) {
 
   return (
     <div className="App">
+      <AdminToolbar />
       <Switch>
         <Route
           exact
