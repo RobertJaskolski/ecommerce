@@ -8,7 +8,7 @@ function Modal({ hideModal, toggleModal, children }) {
       <div
         className="modalOverlay"
         onClick={() => {
-          toggleModal(true);
+          toggleModal();
         }}
       />
       <div className="modal">{children}</div>

@@ -4,6 +4,7 @@ import userIMG from "../../assets/user.png";
 
 function UserProfile(props) {
   const { currentUser } = props;
+
   const { displayName } = currentUser;
 
   return (
