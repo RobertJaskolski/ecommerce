@@ -7,14 +7,14 @@ const mapState = ({ user }) => ({
   currentUser: user["currentUser"],
 });
 
-function VerticalNav({ cildren }) {
+function VerticalNav({ children }) {
   const { currentUser } = useSelector(mapState);
   const configUserProfile = { currentUser };
 
   return (
     <div className="verticalNav">
       <UserProfile {...configUserProfile} />
-      <div className="menu">{cildren}</div>
+      <div className="menu">{children}</div>
     </div>
   );
 }

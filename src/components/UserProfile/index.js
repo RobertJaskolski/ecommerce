@@ -5,8 +5,6 @@ import userIMG from "../../assets/user.png";
 function UserProfile(props) {
   const { currentUser } = props;
 
-  const { displayName } = currentUser;
-
   return (
     <div className="userProfile">
       <ul>
@@ -16,7 +14,9 @@ function UserProfile(props) {
           </div>
         </li>
         <li>
-          <span className="displayName">{displayName && displayName}</span>
+          <span className="displayName">
+            {currentUser?.displayName && currentUser.displayName}
+          </span>
         </li>
       </ul>
     </div>
