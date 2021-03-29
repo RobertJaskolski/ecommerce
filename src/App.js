@@ -10,6 +10,8 @@ import AdminToolbar from "./components/AdminToolbar";
 // Layouts
 import MainLayout from "./layouts/MainLayout";
 import HomepageLayout from "./layouts/HomepageLayout";
+import AdminLayout from "./layouts/AdminLayout";
+import DashboardLayout from "./layouts/DashboardLayout";
 
 // Pages
 import Homepage from "./pages/Homepage";
@@ -71,20 +73,20 @@ function App(props) {
           path="/dashboard"
           render={() => (
             <WithAuth>
-              <MainLayout>
+              <DashboardLayout>
                 <Dashboard />
-              </MainLayout>
+              </DashboardLayout>
             </WithAuth>
           )}
         />
         <Route
           path="/admin"
           render={() => (
-            <MainLayout>
+            <AdminLayout>
               <WithAdminAuth>
                 <Admin />
               </WithAdminAuth>
-            </MainLayout>
+            </AdminLayout>
           )}
         />
       </Switch>
