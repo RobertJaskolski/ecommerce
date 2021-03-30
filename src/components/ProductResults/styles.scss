@@ -4,16 +4,16 @@
   padding: 0;
   margin: 2rem 0;
   .productResults {
-    margin: 0 -10px;
+    margin: 3rem -10px;
+    display: flex;
+    flex-wrap: wrap;
   }
 }
 
 .product {
   width: 33%;
-  height: 55rem;
   margin: 0 auto 2rem;
   padding: 0 10px;
-  float: left;
   .thumb {
     display: block;
     width: 100%;
@@ -49,6 +49,9 @@
           font-size: 1.6rem;
           line-height: 1;
           font-weight: 400;
+        }
+        .addToCart {
+          margin: 2rem 0 0 0;
         }
       }
     }

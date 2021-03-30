@@ -1,6 +1,10 @@
 import React from "react";
+import Button from "../../../components/Forms/Button";
 
 function Product({ productThumbnail, productName, productPrice }) {
+  const configAddToCartButton = {
+    type: "button",
+  };
   if (!productThumbnail || !productName || typeof productPrice === "undefined")
     return null;
   return (
@@ -15,6 +19,11 @@ function Product({ productThumbnail, productName, productPrice }) {
           </li>
           <li>
             <span className="price">{productPrice} $</span>
+          </li>
+          <li>
+            <div className="addToCart">
+              <Button {...configAddToCartButton}>Add to cart</Button>
+            </div>
           </li>
         </ul>
       </div>
