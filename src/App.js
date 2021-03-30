@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import Recovery from "./pages/Recovery";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
+import Search from "./pages/Search";
 
 // HoC
 import WithAuth from "./hoc/WithAuth";
@@ -43,6 +44,14 @@ function App(props) {
             <HomepageLayout>
               <Homepage />
             </HomepageLayout>
+          )}
+        />
+        <Route
+          path="/search"
+          render={() => (
+            <MainLayout>
+              <Search />
+            </MainLayout>
           )}
         />
         <Route
