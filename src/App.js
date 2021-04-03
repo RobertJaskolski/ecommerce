@@ -11,7 +11,7 @@ import AdminToolbar from "./components/AdminToolbar";
 import MainLayout from "./layouts/MainLayout";
 import HomepageLayout from "./layouts/HomepageLayout";
 import AdminLayout from "./layouts/AdminLayout";
-import DashboardLayout from "./layouts/DashboardLayout";
+import DashboardLayout from "./layouts/DashBoardLayout";
 
 // Pages
 import Homepage from "./pages/Homepage";
@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import Recovery from "./pages/Recovery";
 import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
+import Search from "./pages/Search";
 
 // HoC
 import WithAuth from "./hoc/WithAuth";
@@ -43,6 +44,23 @@ function App(props) {
             <HomepageLayout>
               <Homepage />
             </HomepageLayout>
+          )}
+        />
+        <Route
+          exact
+          path="/search"
+          render={() => (
+            <MainLayout>
+              <Search />
+            </MainLayout>
+          )}
+        />
+        <Route
+          path="/search/:filterType"
+          render={() => (
+            <MainLayout>
+              <Search />
+            </MainLayout>
           )}
         />
         <Route
