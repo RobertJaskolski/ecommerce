@@ -86,9 +86,7 @@ function ProductResults({}) {
             return null;
 
           const configProduct = {
-            productThumbnail,
-            productName,
-            productPrice,
+            ...product,
           };
           return <Product {...configProduct} />;
         })}
