@@ -17,7 +17,7 @@ function ProductCard({}) {
   const { productID } = useParams();
   const { product } = useSelector(mapState);
 
-  const { productName, productThumbnail, productPrice } = product;
+  const { productName, productThumbnail, productPrice, productDesc } = product;
 
   const configButtonAddToCart = {
     type: "button",
@@ -48,6 +48,7 @@ function ProductCard({}) {
               <Button {...configButtonAddToCart}>Add to Cart</Button>
             </div>
           </li>
+          <span dangerouslySetInnerHTML={{ __html: productDesc }} />
         </ul>
       </div>
     </div>
