@@ -4,9 +4,14 @@ import {
   handleAddProduct,
   handleFetchProducts,
   handleDeleteProduct,
+  handleFetchProduct,
 } from "./products.helpers";
 import { auth } from "../../firebase/utils";
-import { fetchProductsStart, setProducts } from "./products.actions";
+import {
+  fetchProductsStart,
+  setProducts,
+  setProduct,
+} from "./products.actions";
 
 export function* addProduct({
   payload: { productCategory, productName, productThumbnail, productPrice },
@@ -57,10 +62,24 @@ export function* onDeleteProductStart() {
   yield takeLatest(productsTypes.DELETE_PRODUCT_START, deleteProduct);
 }
 
+export function* fetchProduct({ payload }) {
+  try {
+    const product = yield handleFetchProduct(payload);
+    yield put(setProduct(product));
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export function* onFetchProductStart() {
+  yield takeLatest(productsTypes.FETCH_PRODUCT_START, fetchProduct);
+}
+
 export default function* productsSagas() {
   yield all([
     call(onAddProductStart),
     call(onFetchProductsStart),
     call(onDeleteProductStart),
+    call(onFetchProductStart),
   ]);
 }
