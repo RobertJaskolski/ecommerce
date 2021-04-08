@@ -23,3 +23,25 @@ export const handleRemoveCartItem = ({ prevCartItems, cartItemToRemove }) => {
     (item) => item.documentID !== cartItemToRemove.documentID
   );
 };
+
+export const handleReduceCartItem = ({ prevCartItems, cartItemToReduce }) => {
+  const existingCartItem = prevCartItems.find(
+    (item) => item.documentID === cartItemToReduce.documentID
+  );
+
+  if (existingCartItem.quantity === 1) {
+    return prevCartItems.filter(
+      (item) => item.documentID !== cartItemToReduce.documentID
+    );
+  }
+  return prevCartItems.map((item) =>
+    item.documentID === existingCartItem.documentID
+      ? {
+          ...item,
+          quantity: item.quantity - 1,
+        }
+      : {
+          ...item,
+        }
+  );
+};
