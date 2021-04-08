@@ -77,7 +77,12 @@ function ProductResults({}) {
 
       <div className="productResults">
         {data.map((product, pos) => {
-          const { productThumbnail, productName, productPrice } = product;
+          const {
+            productThumbnail,
+            productName,
+            productPrice,
+            documentID,
+          } = product;
           if (
             !productThumbnail ||
             !productName ||
@@ -88,7 +93,7 @@ function ProductResults({}) {
           const configProduct = {
             ...product,
           };
-          return <Product {...configProduct} />;
+          return <Product key={documentID} {...configProduct} />;
         })}
       </div>
       {!isLastPage && <LoadMore {...configLoadMore} />}

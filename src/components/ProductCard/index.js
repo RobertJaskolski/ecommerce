@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductStart,
@@ -7,6 +7,7 @@ import {
 } from "../../redux/Products/products.actions";
 import "./styles.scss";
 import Button from "../Forms/Button";
+import { addProduct } from "../../redux/Cart/cart.actions";
 
 const mapState = ({ productsData }) => ({
   product: productsData["product"],
@@ -14,11 +15,15 @@ const mapState = ({ productsData }) => ({
 
 function ProductCard({}) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { productID } = useParams();
   const { product } = useSelector(mapState);
-
   const { productName, productThumbnail, productPrice, productDesc } = product;
-
+  const handleAddToCart = (product) => {
+    if (!product) return;
+    dispatch(addProduct(product));
+    history.push("/cart");
+  };
   const configButtonAddToCart = {
     type: "button",
   };
@@ -45,7 +50,12 @@ function ProductCard({}) {
           </li>
           <li>
             <div className="addToCart">
-              <Button {...configButtonAddToCart}>Add to Cart</Button>
+              <Button
+                {...configButtonAddToCart}
+                onClick={() => handleAddToCart(product)}
+              >
+                Add to Cart
+              </Button>
             </div>
           </li>
           <span dangerouslySetInnerHTML={{ __html: productDesc }} />

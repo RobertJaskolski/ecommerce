@@ -22,6 +22,7 @@ import Dashboard from "./pages/Dashboard";
 import Admin from "./pages/Admin";
 import Search from "./pages/Search";
 import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
 
 // HoC
 import WithAuth from "./hoc/WithAuth";
@@ -45,6 +46,15 @@ function App(props) {
             <HomepageLayout>
               <Homepage />
             </HomepageLayout>
+          )}
+        />
+        <Route
+          exact
+          path="/cart"
+          render={() => (
+            <MainLayout>
+              <Cart />
+            </MainLayout>
           )}
         />
         <Route
