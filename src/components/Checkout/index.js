@@ -4,6 +4,7 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../../redux/Cart/cart.selectors";
+import { useHistory } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 import Button from "../Forms/Button";
 import Item from "./Item";
@@ -15,6 +16,7 @@ const mapState = createStructuredSelector({
 });
 
 function Checkout() {
+  const history = useHistory();
   const { cartItems, total } = useSelector(mapState);
   return (
     <div className="checkout">
@@ -75,7 +77,9 @@ function Checkout() {
                       <tbody>
                         <tr>
                           <td>
-                            <Button>Continue Shopping</Button>
+                            <Button onClick={() => history.goBack()}>
+                              Continue Shopping
+                            </Button>
                           </td>
                           <td>
                             <Button>Checkout</Button>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchProductStart,
@@ -15,12 +15,14 @@ const mapState = ({ productsData }) => ({
 
 function ProductCard({}) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { productID } = useParams();
   const { product } = useSelector(mapState);
   const { productName, productThumbnail, productPrice, productDesc } = product;
   const handleAddToCart = (product) => {
     if (!product) return;
     dispatch(addProduct(product));
+    history.push("/cart");
   };
   const configButtonAddToCart = {
     type: "button",
