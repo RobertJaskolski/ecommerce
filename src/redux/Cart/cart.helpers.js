@@ -17,3 +17,9 @@ export const handleAddToCart = ({ prevCartItems, nextCartItem }) => {
 
   return [...prevCartItems, { ...nextCartItem, quantity: quantityIncrement }];
 };
+
+export const handleRemoveCartItem = ({ prevCartItems, cartItemToRemove }) => {
+  return prevCartItems.filter(
+    (item) => item.documentID !== cartItemToRemove.documentID
+  );
+};
