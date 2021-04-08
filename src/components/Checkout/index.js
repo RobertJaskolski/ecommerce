@@ -1,6 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectCartItems } from "../../redux/Cart/cart.selectors";
+import {
+  selectCartItems,
+  selectCartTotal,
+} from "../../redux/Cart/cart.selectors";
 import { createStructuredSelector } from "reselect";
 import Button from "../Forms/Button";
 import Item from "./Item";
@@ -8,10 +11,11 @@ import "./styles.scss";
 
 const mapState = createStructuredSelector({
   cartItems: selectCartItems,
+  total: selectCartTotal,
 });
 
 function Checkout() {
-  const { cartItems } = useSelector(mapState);
+  const { cartItems, total } = useSelector(mapState);
   return (
     <div className="checkout">
       <h1>Checkout</h1>
@@ -60,7 +64,7 @@ function Checkout() {
                       <tbody>
                         <tr>
                           <td>
-                            <h3>Total:</h3>
+                            <h3>Total: {total} $</h3>
                           </td>
                         </tr>
                       </tbody>
