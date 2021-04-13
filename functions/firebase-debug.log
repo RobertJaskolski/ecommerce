@@ -166,3 +166,8 @@ Issues? Report them at https://github.com/firebase/firebase-tools/issues and att
 [info] i  functions: Finished "api" in ~1s {"metadata":{"emulator":{"name":"functions"},"function":{"name":"api"},"message":"Finished \"api\" in ~1s"}}
 [debug] [2021-04-13T14:28:40.789Z] [worker-api-c2f142f8-db4c-44df-a893-2e8dac05f625]: IDLE {"metadata":{"emulator":{"name":"functions"},"message":"[worker-api-c2f142f8-db4c-44df-a893-2e8dac05f625]: IDLE"}}
 [debug] [2021-04-13T14:28:40.790Z] [work-queue] {"queueLength":0,"workRunningCount":0}
+[debug] [2021-04-13T14:34:57.824Z] [worker-api-0f1685bc-9cb1-45ae-93f6-2b0d9e0b437c]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-api-0f1685bc-9cb1-45ae-93f6-2b0d9e0b437c]: exited"}}
+[debug] [2021-04-13T14:34:57.825Z] [worker-api-0f1685bc-9cb1-45ae-93f6-2b0d9e0b437c]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-api-0f1685bc-9cb1-45ae-93f6-2b0d9e0b437c]: FINISHED"}}
+[debug] [2021-04-13T14:34:57.836Z] [worker-~diagnostic~-825e2a51-63a3-4b3a-af4a-5d8366c56834]: exited {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-825e2a51-63a3-4b3a-af4a-5d8366c56834]: exited"}}
+[debug] [2021-04-13T14:34:57.836Z] [worker-~diagnostic~-825e2a51-63a3-4b3a-af4a-5d8366c56834]: FINISHED {"metadata":{"emulator":{"name":"functions"},"message":"[worker-~diagnostic~-825e2a51-63a3-4b3a-af4a-5d8366c56834]: FINISHED"}}
+[debug] [2021-04-13T14:34:57.841Z] Received signal SIGHUP 1
