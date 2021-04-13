@@ -30,3 +30,16 @@ export const handleGetUserOrderHistory = (uid) => {
       .catch((err) => reject(err));
   });
 };
+
+export const handleGetOrder = (orderID) => {
+  return new Promise((resolve, reject) => {
+    let ref = firestore.collection("orders").doc(orderID);
+    ref
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists)
+          resolve({ ...snapshot.data(), documentID: orderID });
+      })
+      .catch((err) => reject(err));
+  });
+};

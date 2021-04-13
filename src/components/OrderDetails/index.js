@@ -1,67 +1,67 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   TableContainer,
   Table,
   TableHead,
-  TableRow,
   TableBody,
+  TableRow,
   TableCell,
 } from "@material-ui/core";
-import moment from "moment";
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setOrderDetails } from "../../redux/Orders/orders.actions";
 
 const columns = [
-  { id: "orderCreatedDate", lable: "Order Date" },
-  { id: "documentID", lable: "Order ID" },
-  { id: "orderTotal", lable: "Amount" },
+  { id: "productThumbnail", lable: "" },
+  { id: "productName", lable: "Name" },
+  { id: "productPrice", lable: "Price" },
+  { id: "quantity", lable: "Quantity" },
 ];
 
 const styles = {
   fontSize: "16px",
-  cursor: "pointer",
   width: "10%",
 };
 
 const formatText = (columnName, columnValue) => {
   switch (columnName) {
-    case "orderTotal":
+    case "productPrice":
       return `${columnValue} $`;
-    case "orderCreatedDate":
-      return moment(columnValue).format("DD/MM/YYYY");
+    case "productThumbnail":
+      return <img alt={columnName} src={columnValue} width={250} />;
     default:
       return columnValue;
   }
 };
 
-function OrderHistory({ orders }) {
-  const history = useHistory();
+function OrderDetails({ order }) {
+  const dispatch = useDispatch();
+  const orderItems = order && order.orderItems;
+  useEffect(() => {
+    return () => {
+      dispatch(setOrderDetails({}));
+    };
+  }, []);
   return (
     <TableContainer>
       <Table>
         <TableHead>
           <TableRow>
             {columns.map((column, pos) => {
-              const { label } = column;
+              const { lable } = column;
               return (
                 <TableCell style={styles} key={pos}>
-                  {label}
+                  {lable}
                 </TableCell>
               );
             })}
           </TableRow>
         </TableHead>
         <TableBody>
-          {Array.isArray(orders) &&
-            orders.length > 0 &&
-            orders.map((row, pos) => {
-              const { documentID } = row;
+          {Array.isArray(orderItems) &&
+            orderItems.length > 0 &&
+            orderItems.map((row, pos) => {
               return (
-                <TableRow
-                  key={pos}
-                  onClick={() => {
-                    history.push(`/order/${documentID}`);
-                  }}
-                >
+                <TableRow key={pos}>
                   {columns.map((column, pos) => {
                     const columnName = column.id;
                     const columnValue = row[columnName];
@@ -80,4 +80,4 @@ function OrderHistory({ orders }) {
   );
 }
 
-export default OrderHistory;
+export default OrderDetails;
