@@ -125,6 +125,7 @@ function PaymentDetails() {
                   }),
                 };
                 dispatch(saveOrderHistory(configOrder));
+                dispatch(clearCart());
               });
           });
       });
