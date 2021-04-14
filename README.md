@@ -2,6 +2,10 @@
 
 ## [Live demo](https://ecommerce-website-867c6.web.app/)
 
+test admin account:
+Login: test@test.test
+Password: Zaq12wsx
+
 Simple shop connected with firebase and stripe payments.
 
 ## Description
