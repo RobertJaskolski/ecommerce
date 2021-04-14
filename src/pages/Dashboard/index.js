@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserHistory } from "../../redux/Orders/orders.actions";
-import "./styles.scss";
 import OrderHistory from "../../components/OrderHistory";
 
 const mapState = ({ user, ordersData }) => ({
