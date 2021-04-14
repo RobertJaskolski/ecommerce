@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetPasswordStart,
