@@ -27,7 +27,7 @@ const formatText = (columnName, columnValue) => {
     case "orderTotal":
       return `${columnValue} $`;
     case "orderCreatedDate":
-      return moment(columnValue).format("DD/MM/YYYY");
+      return moment(columnValue.nano).format("DD/MM/YYYY");
     default:
       return columnValue;
   }
