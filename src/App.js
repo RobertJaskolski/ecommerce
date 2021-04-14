@@ -24,6 +24,7 @@ import Search from "./pages/Search";
 import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Payment from "./pages/Payment";
+import Order from "./pages/Order";
 
 // HoC
 import WithAuth from "./hoc/WithAuth";
@@ -123,6 +124,16 @@ function App(props) {
             <WithAuth>
               <DashboardLayout>
                 <Dashboard />
+              </DashboardLayout>
+            </WithAuth>
+          )}
+        />
+        <Route
+          path="/order/:orderID"
+          render={() => (
+            <WithAuth>
+              <DashboardLayout>
+                <Order />
               </DashboardLayout>
             </WithAuth>
           )}

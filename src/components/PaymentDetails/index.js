@@ -8,7 +8,9 @@ import { useHistory } from "react-router-dom";
 import {
   selectCartTotal,
   selectCartItemsCount,
+  selectCartItems,
 } from "../../redux/Cart/cart.selectors";
+import { saveOrderHistory } from "../../redux/Orders/orders.actions";
 import { createStructuredSelector } from "reselect";
 import { useSelector, useDispatch } from "react-redux";
 import { clearCart } from "../../redux/Cart/cart.actions";
@@ -26,6 +28,7 @@ const initAddressState = {
 const mapState = createStructuredSelector({
   total: selectCartTotal,
   itemCount: selectCartItemsCount,
+  cartItems: selectCartItems,
 });
 
 function PaymentDetails() {
@@ -33,7 +36,7 @@ function PaymentDetails() {
   const stripe = useStripe();
   const history = useHistory();
   const elements = useElements();
-  const { total, itemCount } = useSelector(mapState);
+  const { total, itemCount, cartItems } = useSelector(mapState);
   const [billingAddress, setBillingAddress] = useState({ ...initAddressState });
   const [shippingAddress, setShippingAddress] = useState({
     ...initAddressState,
@@ -102,6 +105,26 @@ function PaymentDetails() {
                 payment_method: paymentMethod.id,
               })
               .then(({ paymentIntent }) => {
+                const configOrder = {
+                  orderTotal: total,
+                  orderItems: cartItems.map((item) => {
+                    const {
+                      documentID,
+                      productThumbnail,
+                      productPrice,
+                      productName,
+                      quantity,
+                    } = item;
+                    return {
+                      documentID,
+                      productThumbnail,
+                      productPrice,
+                      productName,
+                      quantity,
+                    };
+                  }),
+                };
+                dispatch(saveOrderHistory(configOrder));
                 dispatch(clearCart());
               });
           });
@@ -109,7 +132,7 @@ function PaymentDetails() {
   };
 
   useEffect(() => {
-    if (itemCount < 1) history.push("/");
+    if (itemCount < 1) history.push("/dashboard");
   }, [itemCount]);
 
   return (
