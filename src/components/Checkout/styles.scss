@@ -43,3 +43,53 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: 768px) {
+  .checkout {
+    margin: 2rem auto;
+    h1 {
+      display: block;
+      width: 100%;
+    }
+
+    h1,
+    p {
+      text-align: left;
+    }
+
+    .checkoutHeader {
+      border-bottom: 1px solid black;
+    }
+
+    .cart {
+      width: 100%;
+      max-width: 100rem;
+      margin: 0 auto;
+      table {
+        width: 100%;
+        font-size: 1.4rem;
+      }
+    }
+
+    .checkoutHeader,
+    .cart {
+      width: 100%;
+      text-align: left;
+
+      th,
+      td {
+        width: 22%;
+      }
+    }
+
+    .cartItem {
+      td img {
+        display: block;
+        width: 100%;
+      }
+    }
+    .cartBtn {
+      cursor: pointer;
+    }
+  }
+}

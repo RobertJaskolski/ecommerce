@@ -23,7 +23,7 @@ function Directory(props) {
             backgroundImage: `url(${ShopMen})`,
           }}
         >
-          <a onClick={() => history.push("/search/womens")}>Shop Mens</a>
+          <a onClick={() => history.push("/search/mens")}>Shop Mens</a>
         </div>
       </div>
     </div>
