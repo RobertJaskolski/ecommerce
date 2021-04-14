@@ -3,7 +3,6 @@ import ShopMen from "./../../assets/shopMens.jpg";
 import ShopWomen from "./../../assets/shopWomens.jpg";
 import { useHistory } from "react-router-dom";
 import "./styles.scss";
-import { useHistory } from "react-router-dom";
 
 function Directory(props) {
   const history = useHistory();
