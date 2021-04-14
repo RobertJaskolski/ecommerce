@@ -81,54 +81,54 @@ function PaymentDetails() {
     ) {
       return;
     }
-    // apiInstance
-    //   .post("/payments/create", {
-    //     amount: total * 100,
-    //     shipping: {
-    //       name: recipientName,
-    //       address: { ...shippingAddress },
-    //     },
-    //   })
-    //   .then(({ data: clientSecret }) => {
-    //     stripe
-    //       .createPaymentMethod({
-    //         type: "card",
-    //         card: cardElement,
-    //         billing_details: {
-    //           name: nameOnCard,
-    //           address: { ...billingAddress },
-    //         },
-    //       })
-    //       .then(({ paymentMethod }) => {
-    //         stripe
-    //           .confirmCardPayment(clientSecret, {
-    //             payment_method: paymentMethod.id,
-    //           })
-    //           .then(({ paymentIntent }) => {
-    //             const configOrder = {
-    //               orderTotal: total,
-    //               orderItems: cartItems.map((item) => {
-    //                 const {
-    //                   documentID,
-    //                   productThumbnail,
-    //                   productPrice,
-    //                   productName,
-    //                   quantity,
-    //                 } = item;
-    //                 return {
-    //                   documentID,
-    //                   productThumbnail,
-    //                   productPrice,
-    //                   productName,
-    //                   quantity,
-    //                 };
-    //               }),
-    //             };
-    //             dispatch(saveOrderHistory(configOrder));
-    //             dispatch(clearCart());
-    //           });
-    //       });
-    //   });
+    apiInstance
+      .post("/payments/create", {
+        amount: total * 100,
+        shipping: {
+          name: recipientName,
+          address: { ...shippingAddress },
+        },
+      })
+      .then(({ data: clientSecret }) => {
+        stripe
+          .createPaymentMethod({
+            type: "card",
+            card: cardElement,
+            billing_details: {
+              name: nameOnCard,
+              address: { ...billingAddress },
+            },
+          })
+          .then(({ paymentMethod }) => {
+            stripe
+              .confirmCardPayment(clientSecret, {
+                payment_method: paymentMethod.id,
+              })
+              .then(({ paymentIntent }) => {
+                const configOrder = {
+                  orderTotal: total,
+                  orderItems: cartItems.map((item) => {
+                    const {
+                      documentID,
+                      productThumbnail,
+                      productPrice,
+                      productName,
+                      quantity,
+                    } = item;
+                    return {
+                      documentID,
+                      productThumbnail,
+                      productPrice,
+                      productName,
+                      quantity,
+                    };
+                  }),
+                };
+                dispatch(saveOrderHistory(configOrder));
+                dispatch(clearCart());
+              });
+          });
+      });
   };
 
   useEffect(() => {

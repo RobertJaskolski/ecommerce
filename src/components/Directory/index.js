@@ -2,8 +2,10 @@ import React from "react";
 import ShopMen from "./../../assets/shopMens.jpg";
 import ShopWomen from "./../../assets/shopWomens.jpg";
 import "./styles.scss";
+import { useHistory } from "react-router-dom";
 
 function Directory(props) {
+  const history = useHistory();
   return (
     <div className="directory">
       <div className="wrap">
@@ -13,7 +15,7 @@ function Directory(props) {
             backgroundImage: `url(${ShopWomen})`,
           }}
         >
-          <a>Shop Womens</a>
+          <a onClick={() => history.push("/search/womens")}>Shop Womens</a>
         </div>
         <div
           className="item"
@@ -21,7 +23,7 @@ function Directory(props) {
             backgroundImage: `url(${ShopMen})`,
           }}
         >
-          <a>Shop Mens</a>
+          <a onClick={() => history.push("/search/mens")}>Shop Mens</a>
         </div>
       </div>
     </div>
